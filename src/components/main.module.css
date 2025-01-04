@@ -1,0 +1,10 @@
+.title {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.title p {
+  font-size: 25px;
+  font-weight: 700;
+}
