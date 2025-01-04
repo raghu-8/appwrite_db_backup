@@ -14,6 +14,7 @@ export default function Main() {
   const [databases, setDataBases] = useState<GetDatabaseProps[]>([]);
   const [collections, setCollections] = useState<GetCollectionProps[]>([]);
   const [selectedCollections, setSelectedCollections] = useState<string>("");
+  const [documents, setDocuments] = useState<any[]>([]);
 
   return (
     <section>

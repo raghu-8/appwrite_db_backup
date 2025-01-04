@@ -30,8 +30,6 @@ export default function GetDatabasesId({
       }
     }
   };
-  console.log(collections);
-  console.log(databases);
 
   return (
     <section className={styles.wrapper}>

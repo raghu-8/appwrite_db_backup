@@ -5,9 +5,12 @@
   gap: 20px;
   flex-wrap: wrap;
 }
-
+.wrapper > div {
+  height: 100%;
+}
 .active {
   border: 2px solid red;
   width: fit-content;
   padding: 10px 20px;
+  height: 100%;
 }
