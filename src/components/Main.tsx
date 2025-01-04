@@ -1,13 +1,23 @@
 "use client";
 
 import { useState } from "react";
-// import GetDatabases from "./Forms/GetDatabases";
+
 import Image from "next/image";
-import GetDatabases from "./Forms/GetDatabases";
+import GetDatabases from "./Forms/GetDatabases/GetDatabases";
+import GetDatabasesId from "./Forms/GetDatabasesId/GetDatabasesId";
 import styles from "./main.module.css";
+import { GetDatabaseProps } from "./Types";
+// import GetCollections from "./Forms/GetCollections/GetCollections";
 
 export default function Main() {
-  const [databases, setDataBases] = useState([]);
+  //collections
+  const [databases, setDataBases] = useState<GetDatabaseProps[]>([]);
+  const [selectedDatabase, setSelectedDatabase] = useState<string>("");
+  //   const [collections, setcollections] = useState<GetDatabaseProps[]>([]);
+  //   const [selectedCollections, setSelectedCollections] = useState<string>("");
+
+  console.log(selectedDatabase);
+
   return (
     <section>
       <div className={styles.title}>
@@ -20,7 +30,14 @@ export default function Main() {
         <p>Database Backup</p>
       </div>
 
-      <GetDatabases />
+      <GetDatabases setDataBases={setDataBases} />
+      {databases && (
+        <GetDatabasesId
+          databases={databases}
+          setSelectedDatabase={setSelectedDatabase}
+        />
+      )}
+      {/* {selectedDatabase && <GetCollections />} */}
     </section>
   );
 }
