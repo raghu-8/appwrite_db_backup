@@ -6,17 +6,14 @@ import Image from "next/image";
 import GetDatabases from "./Forms/GetDatabases/GetDatabases";
 import GetDatabasesId from "./Forms/GetDatabasesId/GetDatabasesId";
 import styles from "./main.module.css";
-import { GetDatabaseProps } from "./Types";
-// import GetCollections from "./Forms/GetCollections/GetCollections";
+import { GetCollectionProps, GetDatabaseProps } from "./Types";
+import GetCollections from "./Forms/GetCollections/GetCollections";
 
 export default function Main() {
   //collections
   const [databases, setDataBases] = useState<GetDatabaseProps[]>([]);
-  const [selectedDatabase, setSelectedDatabase] = useState<string>("");
-  //   const [collections, setcollections] = useState<GetDatabaseProps[]>([]);
-  //   const [selectedCollections, setSelectedCollections] = useState<string>("");
-
-  console.log(selectedDatabase);
+  const [collections, setCollections] = useState<GetCollectionProps[]>([]);
+  const [selectedCollections, setSelectedCollections] = useState<string>("");
 
   return (
     <section>
@@ -34,10 +31,17 @@ export default function Main() {
       {databases && (
         <GetDatabasesId
           databases={databases}
-          setSelectedDatabase={setSelectedDatabase}
+          setCollections={setCollections}
+          collections={collections}
         />
       )}
-      {/* {selectedDatabase && <GetCollections />} */}
+      {collections && (
+        <GetCollections
+          collections={collections}
+          selectedCollections={selectedCollections}
+          setSelectedCollections={setSelectedCollections}
+        />
+      )}
     </section>
   );
 }

@@ -1,3 +1,12 @@
 .wrapper {
   margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.active {
+  border: 2px solid red;
+  width: fit-content;
+  padding: 10px 20px;
 }

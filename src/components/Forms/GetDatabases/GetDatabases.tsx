@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./styles.module.css";
 import { GetDatabaseProps } from "@/components/Types";
 interface formProps {
@@ -19,33 +19,34 @@ const GetDatabases = ({
     key: "",
   });
 
-  useEffect(() => {
-    async function getAllDatabases() {
-      try {
-        const response = await fetch("/api/getdatabases", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
-        });
+  async function getAllDatabases(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // if (!form.endpoint || !form.projectId || !form.key) {
+    //   alert("fill all the details");
+    //   return;
+    // }
+    try {
+      const response = await fetch("/api/getdatabases", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-        if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        if (data.status == "success") {
-          setDataBases(data.data);
-        }
-      } catch (error) {
-        console.error("Fetch error:", error);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
       }
-    }
 
-    getAllDatabases();
-  }, []);
+      const data = await response.json();
+
+      if (data.status == "success") {
+        setDataBases(data.data);
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -54,7 +55,7 @@ const GetDatabases = ({
     });
   };
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={(e) => getAllDatabases(e)}>
       <div>
         <label>Endpoint</label>
         <input
