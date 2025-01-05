@@ -6,10 +6,14 @@ const GetCollections = ({
   collections,
   selectedCollections,
   setSelectedCollections,
+
+  setDocuments,
 }: {
   collections: GetCollectionProps[];
   selectedCollections: string;
   setSelectedCollections: Dispatch<SetStateAction<string>>;
+
+  setDocuments: Dispatch<SetStateAction<unknown[]>>;
 }) => {
   const handleDocuments = async (id: string) => {
     if (id) {
@@ -24,7 +28,9 @@ const GetCollections = ({
 
         const data = await response.json();
 
-        console.log(data.data.documents);
+        if (data) {
+          setDocuments(data.data.documents);
+        }
       } catch (error) {
         console.error("Fetch error:", error);
       }

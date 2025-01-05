@@ -8,6 +8,7 @@ import GetDatabasesId from "./Forms/GetDatabasesId/GetDatabasesId";
 import styles from "./main.module.css";
 import { GetCollectionProps, GetDatabaseProps } from "./Types";
 import GetCollections from "./Forms/GetCollections/GetCollections";
+import DocumentsManager from "./Forms/DocumentsManager/DocumentsManager";
 
 export default function Main() {
   //collections
@@ -41,8 +42,10 @@ export default function Main() {
           collections={collections}
           selectedCollections={selectedCollections}
           setSelectedCollections={setSelectedCollections}
+          setDocuments={setDocuments}
         />
       )}
+      {documents && <DocumentsManager documents={documents} />}
     </section>
   );
 }
