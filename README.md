@@ -1,4 +1,4 @@
-## etting Started
+## Getting Started
 
 Get a key with database access in appwrite,
 Get ProjectId, API Endpoint from endpoint ,
