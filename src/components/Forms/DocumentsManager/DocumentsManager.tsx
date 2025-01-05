@@ -1,36 +1,27 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import styles from "./styles.module.css";
-import { GetCollectionProps, GetDatabaseProps } from "@/components/Types";
 
 export default function DocumentsManager({
   documents,
 }: {
   documents: unknown[];
 }) {
-  const handleSubmit = async (id: string) => {
-    if (id) {
-      try {
-        const response = await fetch(`/api/getcollections/?dbid=${id}`);
+  const handleSubmit = async () => {
+    const fileData = JSON.stringify(documents, null, 2);
+    const blob = new Blob([fileData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
 
-        if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        if (data.status == "success") {
-        }
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
-    }
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "documents.json";
+    link.click();
   };
 
   return (
     <section className={styles.wrapper}>
-      {documents.map((document, index) => {
-        return <div key={index}>{document.customerName}</div>;
-      })}
+      {documents.length > 1 && (
+        <button onClick={() => handleSubmit()}>Download Data</button>
+      )}
     </section>
   );
 }

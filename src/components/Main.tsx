@@ -6,7 +6,7 @@ import Image from "next/image";
 import GetDatabases from "./Forms/GetDatabases/GetDatabases";
 import GetDatabasesId from "./Forms/GetDatabasesId/GetDatabasesId";
 import styles from "./main.module.css";
-import { GetCollectionProps, GetDatabaseProps } from "./Types";
+import { GetAuthType, GetCollectionProps, GetDatabaseProps } from "./Types";
 import GetCollections from "./Forms/GetCollections/GetCollections";
 import DocumentsManager from "./Forms/DocumentsManager/DocumentsManager";
 

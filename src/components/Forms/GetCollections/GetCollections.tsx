@@ -19,7 +19,7 @@ const GetCollections = ({
     if (id) {
       try {
         const response = await fetch(
-          `/api/getdocuments/?dbid=${collections[0].$id}&collid=${id}`
+          `/api/getdocuments/?dbid=${collections[0].databaseId}&collid=${id}`
         );
 
         if (!response.ok) {

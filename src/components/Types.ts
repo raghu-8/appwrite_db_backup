@@ -7,3 +7,9 @@ export interface GetCollectionProps {
   $id: string;
   databaseId?: string;
 }
+
+export interface GetAuthType {
+  key: string;
+  projectId: string;
+  endpoint: string;
+}

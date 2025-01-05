@@ -1,8 +1,22 @@
 import { NextResponse } from "next/server";
 import { appwriteClient } from "@/utilities/appwrite";
 import { Databases } from "node-appwrite";
-export const POST = async () => {
+export const GET = async () => {
   try {
+    if (
+      !process.env.DB_ENDPOINT ||
+      !process.env.DB_PROJECT_ID ||
+      !process.env.DB_KEY
+    ) {
+      return new NextResponse(
+        JSON.stringify({ status: "failed", message: "Missing env variable" }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" }, // Set the content type
+        }
+      );
+    }
+
     // const payload = await request.json();
 
     // if (!payload) {

@@ -9,10 +9,7 @@ export const GET = async (request: NextRequest) => {
     console.log(selectedDbId, selectedCollId);
 
     const databases = new Databases(appwriteClient);
-    const result = await databases.listDocuments(
-      "670dfa0d001960f5ebd2",
-      "6714c0100017a8f56bb8"
-    );
+    const result = await databases.listDocuments(selectedDbId, selectedCollId);
 
     return new NextResponse(
       JSON.stringify({ status: "success", data: result }),

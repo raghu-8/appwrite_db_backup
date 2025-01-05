@@ -1,45 +1,44 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import styles from "./styles.module.css";
 import { GetDatabaseProps } from "@/components/Types";
-interface formProps {
-  endpoint: string;
-  projectId: string;
-  key: string;
-}
+// interface formProps {
+//   endpoint: string;
+//   projectId: string;
+//   key: string;
+// }
 
 const GetDatabases = ({
   setDataBases,
 }: {
   setDataBases: Dispatch<SetStateAction<GetDatabaseProps[]>>;
 }) => {
-  const [form, setForm] = useState<formProps>({
-    endpoint: "",
-    projectId: "",
-    key: "",
-  });
+  // const [form, setForm] = useState<formProps>({
+  //   endpoint: "",
+  //   projectId: "",
+  //   key: "",
+  // });
 
   async function getAllDatabases(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     // if (!form.endpoint || !form.projectId || !form.key) {
     //   alert("fill all the details");
     //   return;
     // }
+
     try {
-      const response = await fetch("/api/getdatabases", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+      const response = await fetch("/api/getdatabases");
 
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
 
       const data = await response.json();
-
+      if (data.status == "failed") {
+        alert(data.message);
+        return;
+      }
       if (data.status == "success") {
         setDataBases(data.data);
       }
@@ -48,15 +47,15 @@ const GetDatabases = ({
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setForm((prevValue) => {
-      return { ...prevValue, [name]: value };
-    });
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setForm((prevValue) => {
+  //     return { ...prevValue, [name]: value };
+  //   });
+  // };
   return (
     <form className={styles.form} onSubmit={(e) => getAllDatabases(e)}>
-      <div>
+      {/* <div>
         <label>Endpoint</label>
         <input
           type="text"
@@ -75,7 +74,7 @@ const GetDatabases = ({
       <div>
         <label>Key</label>
         <input type="text" value={form.key} onChange={(e) => handleChange(e)} />
-      </div>
+      </div> */}
       <div>
         <input type="submit" value="Get Databases" className="btn" />
       </div>
